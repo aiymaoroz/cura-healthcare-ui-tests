@@ -27,9 +27,8 @@ public class LoginSteps {
         if (loginPage.isLogoutLinkPresent()) {
             loginPage.clickLogoutLink();
             loginPage.clickBurgerMenu();
-        } else {
-            assertTrue(loginPage.isLoginLinkPresent(), "Login link should be present when user is logged out");
         }
+        assertTrue(loginPage.isLoginLinkPresent(), "Login link should be present when user is logged out");
     }
 
     @When("the user clicks the {string} button from navigation bar")
@@ -38,7 +37,7 @@ public class LoginSteps {
             loginPage.clickLoginLink();
             assertTrue(loginPage.isTextPresentOnLoginPageHeader(menuButtonName));
         } else if (menuButtonName.equalsIgnoreCase("Logout")) {
-            home.clickLogoutLink();
+            loginPage.clickLogoutLink();
         } else {
             throw new IllegalArgumentException("Invalid menu button name: " + menuButtonName);
         }
@@ -61,12 +60,6 @@ public class LoginSteps {
                 String expected = ConfigReader.getProperty("curahealthcare.appointment.url");
                 helper.waitForUrlToBe(expected);
                 assertEquals(expected, driver.getCurrentUrl(), "Appointment page URL mismatch");
-            }
-
-            case "home" -> {
-                String expected = ConfigReader.getProperty("curahealthcare.homepage.url");
-                helper.waitForUrlToBe(expected);
-                assertEquals(expected, driver.getCurrentUrl(), "Home page URL mismatch");
             }
 
             case "login" -> {

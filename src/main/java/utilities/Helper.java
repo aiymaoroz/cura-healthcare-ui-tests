@@ -1,6 +1,7 @@
 package utilities;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -29,7 +30,8 @@ public class Helper {
 
     public boolean isElementVisible(By locator) {
         try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return element.isDisplayed();
         } catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {
             return false;
         }
@@ -43,8 +45,24 @@ public class Helper {
         wait.until(ExpectedConditions.urlToBe(expectedUrl));
     }
 
-    public void waitForSidebarToBeOpen(By locator) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    public Object runJavaScript(String script, Object... args) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        return jsExecutor.executeScript(script, args);
     }
 
+    public void waitForElementClassContains(By locator, String className) {
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                WebElement el = driver.findElement(locator);
+                String classAttr = el.getAttribute("class");
+                return classAttr != null && classAttr.contains(className);
+            }
+
+            @Override
+            public String toString() {
+                return String.format("element located by %s to have class containing '%s'", locator, className);
+            }
+        });
+    }
 }

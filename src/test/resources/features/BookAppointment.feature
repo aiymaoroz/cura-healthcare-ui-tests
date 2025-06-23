@@ -28,7 +28,7 @@ Feature: Booking Appointment Functionality
       | Seoul    | No          | Medicaid | 28/06/2025 | Test case 2 |
       | Hongkong | Yes         | None     | 30/06/2025 |             |
 
-
+  @Cura
     # ---------- NEGATIVE PATHS ---------- #
   Scenario: Booking an appointment with an empty visit date
     When the user clicks the "Book Appointment" button
