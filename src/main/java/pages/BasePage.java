@@ -1,10 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Helper;
 
@@ -15,42 +12,43 @@ public class BasePage {
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        this.helper = new Helper(driver);
+        this.helper = new Helper();
     }
 
-    @FindBy(id = "menu-toggle")
-    private WebElement burgerMenuButton;
+    private final By burgerMenuButton = By.id("menu-toggle"); // or whatever locator works
+    private final By loginLink = By.xpath("//a[contains(text(), 'Login')]");
+    private final By logoutLink = By.xpath("//a[contains(text(), 'Logout')]");
+    private final By sidebarOpen = By.cssSelector("#sidebar-wrapper.active");
+    private final By homeLink = By.xpath("//a[contains(text(), 'Home')]");
 
-    @FindBy(xpath = "//a[contains(text(), 'Home')]")
-    private WebElement menuHomeLink;
 
-    public boolean isLoginLinkPresent() {
-        return helper.isElementPresent(By.xpath("//a[contains(text(), 'Login')]"));
+    public void clickBurgerMenu() {
+        helper.waitForClickability(burgerMenuButton).click();
+        helper.waitForSidebarToBeOpen(sidebarOpen);
     }
 
     public void clickLoginLink() {
-        if (isLoginLinkPresent()) {
-            driver.findElement(By.xpath("//a[contains(text(), 'Login')]")).click();
-        } else {
-            throw new NoSuchElementException("Login link not found");
+        if (!isLoginLinkPresent()) {
+            clickBurgerMenu();
+            helper.waitForClickability(loginLink).click();
         }
-    }
-
-    public void clickBurgerMenu() {
-        burgerMenuButton.click();
-    }
-
-    public boolean isLogoutLinkPresent() {
-        return helper.isElementPresent(By.xpath("//a[contains(text(), 'Logout')]"));
+        helper.waitForClickability(loginLink).click();
     }
 
     public void clickLogoutLink() {
-        if (isLogoutLinkPresent()) {
-            driver.findElement(By.xpath("//a[contains(text(), 'Logout')]")).click();
-        } else {
-            throw new NoSuchElementException("Logout link not found");
+        if (!isLogoutLinkPresent()) {
+            clickBurgerMenu();
+            helper.waitForClickability(logoutLink).click();
         }
+        helper.waitForClickability(logoutLink).click();
     }
 
+    public boolean isLoginLinkPresent() {
+        return helper.isElementVisible(loginLink);
+    }
+
+    public boolean isLogoutLinkPresent() {
+        return helper.isElementVisible(logoutLink);
+    }
 
 }

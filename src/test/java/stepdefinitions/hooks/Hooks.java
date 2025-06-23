@@ -34,7 +34,7 @@ package stepdefinitions.hooks;
          */
         @Before
         public void setDriver() {
-            driver.get(ConfigReader.getProperty("curahealthcare.homepage"));
+            driver.get(ConfigReader.getProperty("curahealthcare.homepage.url"));
         }
 
         /**
