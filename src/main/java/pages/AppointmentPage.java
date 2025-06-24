@@ -1,10 +1,7 @@
 package pages;
 
 import models.AppointmentDetails;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
@@ -29,15 +26,17 @@ public class AppointmentPage extends BasePage {
      * Clicks the "Book Appointment" button after waiting for it to be clickable.
      */
     public void clickBookAppointmentButton() {
+        //driver.findElement(By.id("txt_visit_date")).sendKeys(Keys.TAB);
         helper.waitForClickability(By.id("btn-book-appointment")).click();
     }
 
     /**
-     * Retrieves the text of the header (h2) element on the appointment page.
+     * Retrieves the text of the header (h2) element after waiting for its visibility.
      *
      * @return the text of the h2 header
      */
     public String getHeaderTwoText() {
+        helper.waitForVisibility(By.xpath("//h2"));
         return driver.findElement(By.xpath("//h2")).getText();
     }
 
@@ -73,7 +72,8 @@ public class AppointmentPage extends BasePage {
     public void fillAppointmentDetails(List<AppointmentDetails> appointmentDetailsList) {
         AppointmentDetails details = appointmentDetailsList.getFirst();
         Select selectFacility = new Select(driver.findElement(facilityDropdown));
-        if (!details.getFacility().equals("-")) selectFacility.selectByValue(details.getFacility()+" CURA Healthcare Center");
+        if (!details.getFacility().equals("-"))
+            selectFacility.selectByValue(details.getFacility() + " CURA Healthcare Center");
         if (details.getReadmission().equalsIgnoreCase("yes")) driver.findElement(readmissionCheckbox).click();
         selectRadioOptionByLabelText(details.getProgram());
         if (!details.getDate().equals("-")) fillVisitDateInputField(details.getDate());

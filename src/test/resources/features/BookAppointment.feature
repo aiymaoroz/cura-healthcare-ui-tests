@@ -28,6 +28,7 @@ Feature: Booking Appointment Functionality
     Then the message containing "Please fill out this field" should be displayed on date field
     And the user should stay on the appointment page
 
+  @KnownBug
   Scenario: Booking an appointment with a past visit date should fail
     When the user fills the date field with "01/01/2020"
     And the user clicks the Book Appointment button

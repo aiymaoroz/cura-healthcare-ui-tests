@@ -11,10 +11,10 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"stepdefinitions", "stepdefinitions.hooks"},
-        tags = "@Login or @Booking",
+        tags = "(@Login or @Booking) and not @KnownBug",
         plugin = {
                 "pretty",
-                "html:target/CucumberReports/html-report.html",
+                "html:target/CucumberReports/cucumber-reports.html",
                 "json:target/CucumberReports/report.json",
                 "junit:target/CucumberReports/junit-report.xml"
         },

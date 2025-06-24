@@ -3,8 +3,6 @@ package stepdefinitions;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.AppointmentDetails;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import pages.AppointmentPage;
 import utilities.ConfigReader;
@@ -42,15 +40,15 @@ public class AppointmentSteps {
     }
 
     @When("the user clicks the Book Appointment button")
-    public void the_user_clicks_the_Make_Appointment_button() {
-        driver.findElement(By.id("txt_visit_date")).sendKeys(Keys.TAB);
+    public void the_user_clicks_the_Book_Appointment_button() {
         appointment.clickBookAppointmentButton();
     }
 
     @Then("the Confirmation page should be displayed")
     public void the_Confirmation_page_should_be_displayed() {
-        helper.waitForUrlToBe(ConfigReader.getProperty("curahealthcare.appointment.summary.url"));
         assertTrue(appointment.getHeaderTwoText().contains("Confirmation"));
+        assertEquals(ConfigReader.getProperty("curahealthcare.appointment.summary.url"), driver.getCurrentUrl(),
+                "Confirmation page URL mismatch");
     }
 
     @Then("the details should match:")
@@ -73,6 +71,6 @@ public class AppointmentSteps {
     @Then("the user should stay on the appointment page")
     public void the_user_should_stay_on_the_appointment_page() {
         assertEquals(ConfigReader.getProperty("curahealthcare.appointment.url"), driver.getCurrentUrl(), "User is not on Make Appointment page");
+        assertTrue(appointment.getHeaderTwoText().contains("Make Appointment"), "Header text mismatch on Make Appointment page");
     }
-
 }
