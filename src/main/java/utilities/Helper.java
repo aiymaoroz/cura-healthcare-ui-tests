@@ -1,7 +1,6 @@
 package utilities;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,19 +12,19 @@ public class Helper {
 
     public Helper() {
         this.driver = Driver.getDriver();
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
     public WebElement waitForVisibility(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    public void waitForElementAtXpathToBeVisible(By xpath) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(xpath));
+    public WebElement waitForClickability(By locator) {
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
-    public void waitForElementWithIdToBeVisible(String id) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
+    public void waitForElementAtXpathToBeVisible(By xpath) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(xpath));
     }
 
     public boolean isElementVisible(By locator) {
@@ -37,10 +36,6 @@ public class Helper {
         }
     }
 
-    public WebElement waitForClickability(By locator) {
-        return wait.until(ExpectedConditions.elementToBeClickable(locator));
-    }
-
     public void waitForUrlToBe(String expectedUrl) {
         wait.until(ExpectedConditions.urlToBe(expectedUrl));
     }
@@ -48,21 +43,5 @@ public class Helper {
     public Object runJavaScript(String script, Object... args) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         return jsExecutor.executeScript(script, args);
-    }
-
-    public void waitForElementClassContains(By locator, String className) {
-        wait.until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver driver) {
-                WebElement el = driver.findElement(locator);
-                String classAttr = el.getAttribute("class");
-                return classAttr != null && classAttr.contains(className);
-            }
-
-            @Override
-            public String toString() {
-                return String.format("element located by %s to have class containing '%s'", locator, className);
-            }
-        });
     }
 }

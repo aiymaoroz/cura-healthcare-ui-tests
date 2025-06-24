@@ -28,8 +28,15 @@ public class LoginPage extends BasePage {
         loginBtn.click();
     }
 
-    public boolean isTextPresentOnLoginPageHeader(String text) {
-        helper.waitForElementAtXpathToBeVisible(By.xpath("//div[@class='col-sm-12 text-center']"));
-        return loginPageHeader.getText().contains(text);
+    public String getTextOnFailedLoginPageHeader() {
+        helper.waitForVisibility(By.xpath("//div[@class='col-sm-12 text-center']//p[@class='lead text-danger']"));
+        WebElement header = driver.findElement(By.xpath("//div[@class='col-sm-12 text-center']"));
+        return header.getText();
+    }
+
+    public String getTextOnLoginPageHeader() {
+        helper.waitForVisibility(By.xpath("//div[@class='col-sm-12 text-center']"));
+        WebElement header = driver.findElement(By.xpath("//div[@class='col-sm-12 text-center']"));
+        return header.getText();
     }
 }

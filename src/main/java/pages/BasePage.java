@@ -1,11 +1,10 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.Helper;
 
 public class BasePage {
@@ -21,38 +20,28 @@ public class BasePage {
     private final By burgerMenuButton = By.id("menu-toggle"); // or whatever locator works
     private final By loginLink = By.xpath("//a[contains(text(), 'Login')]");
     private final By logoutLink = By.xpath("//a[contains(text(), 'Logout')]");
-    private final By sidebarWrapper = By.id("sidebar-wrapper");
-
 
     public void clickBurgerMenu() {
         helper.waitForVisibility(burgerMenuButton);
         helper.waitForClickability(burgerMenuButton).click();
-        helper.waitForVisibility(sidebarWrapper);
-        helper.waitForElementClassContains(sidebarWrapper, "active");
-    }
-
-    public void clickLoginLink() {
-        if (!isLoginLinkPresent()) {
-            clickBurgerMenu();
-            helper.waitForClickability(loginLink).click();
-        }
-        helper.waitForClickability(loginLink).click();
     }
 
     public void clickLogoutLink() {
-        if (!isLogoutLinkPresent()) {
-            clickBurgerMenu();
-            helper.waitForClickability(logoutLink).click();
-        }
-        helper.waitForClickability(logoutLink).click();
+        helper.waitForVisibility(logoutLink);
+        WebElement element = helper.waitForClickability(logoutLink);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        element.click();
+    }
+
+    public void clickLoginLink() {
+        helper.waitForVisibility(loginLink);
+        WebElement element = helper.waitForClickability(loginLink);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        element.click();
     }
 
     public boolean isLoginLinkPresent() {
         return helper.isElementVisible(loginLink);
-    }
-
-    public boolean isLogoutLinkPresent() {
-        return helper.isElementVisible(logoutLink);
     }
 
 }
