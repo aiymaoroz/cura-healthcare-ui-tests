@@ -13,36 +13,21 @@ import java.time.Duration;
 import java.util.Optional;
 
 /**
- * Utility class for managing the Selenium WebDriver instance.
+ * Utility class for managing the WebDriver instance used for browser automation.
  * <p>
- * Implements a singleton pattern to ensure only one WebDriver instance is used throughout the test run.
- * Provides methods to get the driver, take screenshots on test failure, and close the driver.
+ * Implements a singleton pattern to ensure only one WebDriver instance is active at a time.
+ * Provides methods to initialize the driver based on configuration, take screenshots on test failure,
+ * and properly close the driver after use.
  */
 public class Driver {
-    /**
-     * The singleton WebDriver instance.
-     */
     private static WebDriver driver;
 
-    /**
-     * Private constructor to prevent instantiation.
-     */
     private Driver() {
     }
 
-    /**
-     * Returns the singleton WebDriver instance.
-     * <p>
-     * Initializes the driver if it does not exist, using the browser type specified in the configuration.
-     * Supported browsers: chrome (default), firefox, safari.
-     * Sets timeouts and maximizes the browser window.
-     *
-     * @return the WebDriver instance
-     */
     public static WebDriver getDriver() {
         if (driver == null) {
             String browser = Optional.ofNullable(ConfigReader.getProperty("browser")).orElse("chrome").toLowerCase();
-            System.out.println("Launching browser: " + browser);
             Browser browserStrategy = switch (browser) {
                 case "firefox" -> new FirefoxBrowser();
                 case "safari" -> new SafariBrowser();
@@ -56,11 +41,6 @@ public class Driver {
         return driver;
     }
 
-    /**
-     * Takes a screenshot if the scenario has failed and attaches it to the Cucumber report.
-     *
-     * @param scenario the current Cucumber scenario
-     */
     public static void takeScreenshot(Scenario scenario) {
         if (scenario.isFailed()) {
             final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
@@ -68,10 +48,6 @@ public class Driver {
         }
     }
 
-    /**
-     * Closes the WebDriver instance and sets it to null.
-     * Should be called after test to clean up resources.
-     */
     public static void closeDriver() {
         if (driver != null) {
             driver.quit();

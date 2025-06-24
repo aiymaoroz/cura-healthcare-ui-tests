@@ -16,6 +16,13 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+/**
+ * Step definitions for appointment-related scenarios in Cucumber tests.
+ * <p>
+ * Handles user actions and assertions for filling out the appointment form,
+ * submitting it, and verifying confirmation and validation messages.
+ * Utilizes page objects and utility classes for browser automation and assertions.
+ */
 public class AppointmentSteps {
     WebDriver driver = Driver.getDriver();
     AppointmentPage appointment = new AppointmentPage(driver);

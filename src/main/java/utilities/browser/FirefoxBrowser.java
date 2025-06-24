@@ -6,6 +6,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import utilities.ConfigReader;
 
+/**
+ * Implementation of the Browser interface for Mozilla Firefox.
+ * Configures and creates a new Firefox WebDriver instance with custom options,
+ * including support for headless mode based on configuration properties.
+ */
 public class FirefoxBrowser implements Browser {
     @Override
     public WebDriver createDriver() {

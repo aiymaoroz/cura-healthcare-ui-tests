@@ -1,5 +1,10 @@
 package models;
 
+/**
+ * Simple POJO class for holding appointment details.
+ * Used to store and transfer data such as facility, readmission status,
+ * program, date, and comments, when reading from a datatable.
+ */
 public class AppointmentDetails {
     private String facility;
     private String readmission;

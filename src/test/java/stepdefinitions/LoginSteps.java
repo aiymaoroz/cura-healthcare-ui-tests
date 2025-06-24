@@ -13,6 +13,13 @@ import utilities.Helper;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+/**
+ * Step definitions for login-related scenarios in Cucumber tests.
+ * <p>
+ * Handles user actions and assertions for logging in and out,
+ * navigating to the login page, and verifying login outcomes.
+ * Utilizes page objects and utility classes for browser automation and assertions.
+ */
 public class LoginSteps {
     WebDriver driver = Driver.getDriver();
     private LoginPage loginPage = new LoginPage(driver);

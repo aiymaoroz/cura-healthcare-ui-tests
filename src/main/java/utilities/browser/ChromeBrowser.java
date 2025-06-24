@@ -9,6 +9,11 @@ import utilities.ConfigReader;
 import java.util.Arrays;
 import java.util.Map;
 
+/**
+ * Implementation of the Browser interface for Chrome.
+ * Configures and creates a new Chrome WebDriver instance with custom options,
+ * including incognito mode, disabling password manager, and handling headless mode.
+ */
 public class ChromeBrowser implements Browser {
     @Override
     public WebDriver createDriver() {
