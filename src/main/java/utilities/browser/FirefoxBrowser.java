@@ -7,15 +7,16 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import utilities.ConfigReader;
 
 /**
- * Implementation of the Browser interface for Mozilla Firefox.
- * Configures and creates a new Firefox WebDriver instance with custom options,
- * including support for headless mode based on configuration properties.
+ * Firefox browser implementation of the Browser interface.
  */
 public class FirefoxBrowser implements Browser {
     @Override
     public WebDriver createDriver() {
         WebDriverManager.firefoxdriver().setup();
         FirefoxOptions options = new FirefoxOptions();
+        options.addArguments("--width=1920");
+        options.addArguments("--height=1080");
+
         if (Boolean.parseBoolean(ConfigReader.getProperty("headless"))) {
             options.addArguments("--headless");
         }

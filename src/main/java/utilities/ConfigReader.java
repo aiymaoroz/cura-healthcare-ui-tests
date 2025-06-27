@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Utility class for reading configuration properties from a file.
- * Loads properties from the specified file at class initialization and provides
- * a static method to retrieve property values by key.
+ * Utility class for reading configuration properties.
  */
 public class ConfigReader {
     final private static Properties properties;

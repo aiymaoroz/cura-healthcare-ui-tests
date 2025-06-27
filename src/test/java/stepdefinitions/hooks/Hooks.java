@@ -9,8 +9,6 @@ import utilities.Driver;
 
 /**
  * Cucumber Hooks class for managing setup and teardown actions before and after scenarios.
- * Initializes the WebDriver, navigates to the homepage, captures screenshots, and closes the driver.
- * Used to ensure consistent test environment setup and cleanup for each scenario.
  */
 public class Hooks {
 

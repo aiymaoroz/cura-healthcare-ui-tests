@@ -4,8 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 /**
- * Implementation of the Browser interface for Apple Safari.
- * Provides a method to create and return a new Safari WebDriver instance.
+ * Safari browser implementation of the Browser interface.
  */
 public class SafariBrowser implements Browser {
     @Override

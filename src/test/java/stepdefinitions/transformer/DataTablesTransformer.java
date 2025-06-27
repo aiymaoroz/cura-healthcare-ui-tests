@@ -7,9 +7,6 @@ import java.util.Map;
 
 /**
  * Cucumber data table transformer for converting table rows into {@link AppointmentDetails} objects.
- * <p>
- * Registers a custom transformer method to map each row of a Cucumber data table
- * to an instance of {@link AppointmentDetails} using the @DataTableType annotation.
  */
 public class DataTablesTransformer {
     @DataTableType

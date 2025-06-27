@@ -4,9 +4,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 /**
- * Test runner class for executing Cucumber feature files using TestNG.
- * Configures feature locations, step definitions, tags, and reporting plugins.
- * Inherits from AbstractTestNGCucumberTests to integrate Cucumber with TestNG.
+ * TestNG runner for Cucumber feature files with specified tags and reports.
  */
 @CucumberOptions(
         features = "src/test/resources/features",

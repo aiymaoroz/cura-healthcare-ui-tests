@@ -13,8 +13,7 @@ import java.time.Duration;
 import java.util.Optional;
 
 /**
- * Utility class for managing the WebDriver instance used for browser automation.
- * <p>
+ * Driver utility class for managing WebDriver instances.
  * Implements a singleton pattern to ensure only one WebDriver instance is active at a time.
  * Provides methods to initialize the driver based on configuration, take screenshots on test failure,
  * and properly close the driver after use.
@@ -34,10 +33,10 @@ public class Driver {
                 default -> new ChromeBrowser();
             };
             driver = browserStrategy.createDriver();
-            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            driver.manage().window().maximize();
         }
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
         return driver;
     }
 
