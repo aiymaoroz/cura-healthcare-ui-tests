@@ -132,4 +132,14 @@ public class Helper {
         new Actions(driver).moveToElement(element).perform();
         return element;
     }
+
+    /**
+     * Clicks on the element located by the given locator using JavaScript.
+     *
+     * @param locator the By locator of the element to click
+     */
+    public void jsClick(By locator) {
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+    }
 }

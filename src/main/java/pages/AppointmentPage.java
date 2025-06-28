@@ -24,8 +24,9 @@ public class AppointmentPage extends BasePage {
     private final By commentFieldLabel = By.xpath("//label[@for='txt_comment']");
     private final By bookAppointmentButton = By.id("btn-book-appointment");
 
-    public void clickBookAppointmentButton() {
-        helper.safeClick(bookAppointmentButton);
+    public void clickBookAppointmentButton() throws InterruptedException {
+        //helper.safeClick(bookAppointmentButton);
+        helper.jsClick(bookAppointmentButton);
     }
 
     public String getValidationMessageFromVisitDateInputField() {
