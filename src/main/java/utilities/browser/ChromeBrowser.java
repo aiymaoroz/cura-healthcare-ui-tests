@@ -30,6 +30,8 @@ public class ChromeBrowser implements Browser {
                 "profile.password_manager_enabled", false
         ));
         if (Boolean.parseBoolean(ConfigReader.getProperty("headless"))) {
+            options.addArguments("--window-size=1920,1080");
+            options.addArguments("--start-maximized");
             options.addArguments("--headless=new");
         }
 

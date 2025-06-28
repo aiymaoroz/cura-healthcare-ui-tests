@@ -25,7 +25,7 @@ public class AppointmentSteps extends BaseSteps {
     }
 
     @When("the user clicks the Book Appointment button")
-    public void the_user_clicks_the_Book_Appointment_button() {
+    public void the_user_clicks_the_Book_Appointment_button() throws InterruptedException {
         appointmentPage.clickBookAppointmentButton();
     }
 

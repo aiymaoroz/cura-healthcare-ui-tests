@@ -25,7 +25,7 @@ public class AppointmentPage extends BasePage {
     private final By bookAppointmentButton = By.id("btn-book-appointment");
 
     public void clickBookAppointmentButton() {
-        helper.waitForClickability(bookAppointmentButton).click();
+        helper.safeClick(bookAppointmentButton);
     }
 
     public String getValidationMessageFromVisitDateInputField() {
@@ -59,8 +59,8 @@ public class AppointmentPage extends BasePage {
         }
         if (!details.getComment().equals("-")) {
             helper.safeSendKeys(commentInputField, details.getComment());
+            helper.safeClick(commentFieldLabel);
         }
-        driver.findElement(commentFieldLabel).click();
     }
 
     public String getAppointmentHeaderText() {
