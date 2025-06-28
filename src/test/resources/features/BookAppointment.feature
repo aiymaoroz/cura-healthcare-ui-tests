@@ -18,9 +18,9 @@ Feature: Booking Appointment Functionality
 
     Examples:
       | facility | readmission | program  | date       | comment     |
-      | Tokyo    | Yes         | Medicare | 25/06/2025 | Follow-up   |
-      | Seoul    | No          | Medicaid | 28/06/2025 | Test case 2 |
-      | Hongkong | Yes         | None     | 30/06/2025 | -           |
+      | Tokyo    | Yes         | Medicare | 25/06/2026 | Follow-up   |
+      | Seoul    | No          | Medicaid | 28/06/2026 | Test case 2 |
+      | Hongkong | Yes         | None     | 30/06/2026 | -           |
 
     # ---------- NEGATIVE PATHS ---------- #
   Scenario: Booking an appointment with an empty visit date

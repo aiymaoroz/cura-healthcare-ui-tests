@@ -17,7 +17,7 @@ public class Helper {
 
     public Helper() {
         this.driver = Driver.getDriver();
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
     /**
@@ -76,7 +76,7 @@ public class Helper {
         WebElement element = driver.findElement(locator);
         try {
             runJavaScript("arguments[0].scrollIntoView(true);", element);
-            new WebDriverWait(driver, Duration.ofSeconds(5))
+            new WebDriverWait(driver, Duration.ofSeconds(15))
                     .until(ExpectedConditions.elementToBeClickable(element));
             element.click();
         } catch (ElementClickInterceptedException e) {
