@@ -101,7 +101,7 @@ Fully automated headless test runs triggered on every push to `main`.
 
 ## Running the Tests
 **✅ Locally**   
-_git clone https://github.com/your-username/cura-healthcare-ui-tests.git  
+_git clone https://github.com/aiymaoroz/cura-healthcare-ui-tests.git  
 cd cura-healthcare-ui-tests  
 mvn clean test_   
 
